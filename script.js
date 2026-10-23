@@ -144,7 +144,7 @@
     VEREDICTOS.forEach(function (v) { if (total >= v[0]) texto = v[1]; });
     veredicto.innerHTML = texto;
     meter.style.width = (total / maxPeso * 100) + '%';
-    meter.style.backgroundPosition = (100 - total / maxPeso * 100) + '% 0';
+    meter.style.backgroundPosition = (total / maxPeso * 100) + '% 0';
     window.dispatchEvent(new CustomEvent('vm:pesos', { detail: { items: items, total: total, contrapeso: CONFIG.contrapeso, max: maxPeso } }));
   }
   pesos.forEach(function (p) { p.addEventListener('change', actualizarBalanza); });
