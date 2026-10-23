@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Manrope:wght@400;500;600;700&display=swap">
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/" } }</script>
+<style>
+  html, body { margin: 0; width: var(--W); height: var(--H); overflow: hidden; background: #0B211C; }
+  :root { --W: 1280px; --H: 720px; }
+  body { font-family: Manrope, sans-serif; color: #F3EEE4; position: relative; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .bg { position: absolute; inset: 0; background: radial-gradient(70% 90% at 72% 45%, #1C4A40 0%, #0B211C 55%, #071713 100%); }
+  .grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,161,91,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(201,161,91,.09) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(500px circle at 72% 45%, #000, transparent 75%); }
+  .layer { position: absolute; inset: 0; padding: 96px 80px 50px; display: flex; flex-direction: column; justify-content: center; opacity: 0; }
+  .eyebrow { font-weight: 600; font-size: 15px; letter-spacing: .24em; text-transform: uppercase; color: #C9A15B; display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .eyebrow::before { content: ''; width: 34px; height: 1px; background: currentColor; }
+  h1, h2 { font-family: 'Bodoni Moda', serif; font-weight: 400; margin: 0; letter-spacing: -.03em; line-height: .98; }
+  h1 { font-size: 104px; max-width: 8.5ch; }
+  h2 { font-size: 64px; max-width: 10ch; margin-bottom: 26px; }
+  em { color: #E3C68A; }
+  .m { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; }
+  .m > span { display: inline-block; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-width: 560px; }
+  .steps li { display: grid; grid-template-columns: 54px 1fr; gap: 6px; align-items: baseline; font-size: 23px; line-height: 1.3; opacity: 0; }
+  .steps b { font: italic 400 34px/1 'Bodoni Moda', serif; color: #C9A15B; }
+  .steps small { display: block; color: rgba(243,238,228,.62); font-size: 17px; }
+  .dato { margin-top: 30px; align-self: flex-start; font-weight: 700; font-size: 21px; padding: 12px 22px; border-radius: 999px; background: #C9A15B; color: #071713; opacity: 0; }
+  .sub { font-size: 24px; color: rgba(243,238,228,.75); margin-top: 26px; max-width: 30ch; }
+  .sweep { position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,246,220,.13) 50%, transparent 60%); transform: translateX(-100%); pointer-events: none; }
+  .marca { position: absolute; left: 80px; top: 44px; display: flex; gap: 12px; align-items: center; font: 500 22px/1 'Bodoni Moda', serif; }
+  .marca i { color: #E3C68A; }
+  .marca small { font: 600 11px/1 Manrope; letter-spacing: .2em; color: rgba(243,238,228,.55); padding-left: 12px; border-left: 1px solid rgba(243,238,228,.25); }
+  .fic { position: absolute; right: 24px; bottom: 18px; font-size: 12px; color: rgba(243,238,228,.4); }
+  .cierre { align-items: center; text-align: center; }
+  .cierre h2 { max-width: none; font-size: 88px; }
+  .precio { font: 400 150px/1 'Bodoni Moda', serif; color: #E3C68A; }
+  .tel { font-size: 30px; font-weight: 600; letter-spacing: .04em; margin-top: 18px; }
+  .curtain { position: absolute; inset: 0; background: #071713; opacity: 0; }
+</style>
+</head>
+<body>
+  <div class="bg"></div><div class="grid"></div>
+  <canvas id="c"></canvas>
+  <div class="sweep" id="sweep"></div>
+  <div class="marca">Valdés <i>&amp;</i> Moncayo <small>ABOGADOS · MÉRIDA</small></div>
+  <div id="layers"></div>
+  <div class="fic">Despacho ficticio · concepto de web</div>
+  <div class="curtain" id="curtain"></div>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { crearMonumento, HUECOS, MEDIDAS } from '../modelo.js';
+
+const P = new URLSearchParams(location.search);
+const W = +(P.get('w') || 1280), H = +(P.get('h') || 720);
+document.documentElement.style.setProperty('--W', W + 'px');
+document.documentElement.style.setProperty('--H', H + 'px');
+
+// ---------- Guion ----------
+const SEG = [
+  { id: 'intro', a: 0, b: 8, html: `<p class="eyebrow">Vídeo interactivo</p><h1><span class="m"><span>Tu primera</span></span> <span class="m"><span><em>consulta.</em></span></span></h1><p class="sub">45 minutos para saber si tienes caso, qué opciones hay y cuánto cuesta.</p>`, items: [], cam: 'hero' },
+  { id: 'familia', a: 8, b: 17, html: area('Familia y herencias', 'Divorcio, custodia, <em>herencia.</em>', [['Lo que traes', 'libro de familia, escrituras, nóminas'], ['Lo que hacemos', 'convenio regulador y mediación'], ['Si no hay acuerdo', 'demanda y vista con nosotros']], 'Mutuo acuerdo · desde 690 €'), items: ['docs', 'testigos'] },
+  { id: 'laboral', a: 17, b: 26, html: area('Laboral', 'Me han <em>despedido.</em>', [['Lo que traes', 'carta de despido, contrato y nóminas'], ['Lo que hacemos', 'papeleta de conciliación y demanda'], ['Objetivo', 'readmisión o indemnización completa']], 'Tienes 20 días hábiles'), items: ['plazo', 'docs'] },
+  { id: 'penal', a: 26, b: 35, html: area('Penal', 'Me han <em>denunciado.</em>', [['Lo que traes', 'la citación, mensajes y testigos'], ['Lo que hacemos', 'te acompañamos a declarar'], ['Estrategia', 'pruebas, pericial y juicio']], 'Guardia 24 h'), items: ['mensajes', 'testigos'] },
+  { id: 'empresa', a: 35, b: 44, html: area('Empresa y mercantil', 'Tengo una <em>empresa.</em>', [['Lo que traes', 'estatutos, contratos y facturas'], ['Lo que hacemos', 'pactos de socios y cobro de impagos'], ['Para siempre', 'un abogado que conoce tu empresa']], 'Iguala desde 120 €/mes'), items: ['docs', 'pericial'] },
+  { id: 'cierre', a: 44, b: 50, html: `<p class="eyebrow" style="justify-content:center">Pide tu cita</p><h2>Primera consulta</h2><div class="precio">60 €</div><p class="sub" style="margin-inline:auto">Se descuentan si nos encargas el caso.</p><p class="tel">924 000 000 · Calle Sagasta, Mérida</p>`, items: ['docs', 'mensajes', 'testigos', 'plazo', 'pericial'], cierre: true }
+];
+function area(eb, titulo, pasos, dato) {
+  return `<p class="eyebrow">${eb}</p><h2>${titulo}</h2><ol class="steps">${pasos.map((p, i) => `<li><b>${i + 1}</b><span>${p[0]}<small>${p[1]}</small></span></li>`).join('')}</ol><p class="dato">${dato}</p>`;
+}
+const layers = document.getElementById('layers');
+SEG.forEach(s => { const d = document.createElement('div'); d.className = 'layer' + (s.cierre ? ' cierre' : ''); d.innerHTML = s.html; layers.appendChild(d); s.el = d; });
+
+// ---------- 3D ----------
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.localClippingEnabled = true;
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.75;
+const camera = new THREE.PerspectiveCamera(30, W / H, 0.1, 100); camera.position.set(0, 0, 14);
+scene.add(new THREE.HemisphereLight(0xFFF1D6, 0x0B211C, 0.5));
+const clave = new THREE.DirectionalLight(0xFFE2B0, 2.4); clave.position.set(-4, 7, 6); scene.add(clave);
+const contra = new THREE.DirectionalLight(0x6FD1B4, 1.6); contra.position.set(5, 3, -6); scene.add(contra);
+const barrido = new THREE.SpotLight(0xFFF3D6, 0, 30, 0.22, 0.6, 1.2); scene.add(barrido, barrido.target);
+const mon = crearMonumento('alto');
+const piv = new THREE.Group(); piv.add(mon.raiz); scene.add(piv);
+const recorte = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
+mon.raiz.traverse(o => { if (o.isMesh) { o.material = o.material.clone(); o.material.clippingPlanes = [recorte]; } });
+const objs = {};
+Object.keys(HUECOS).forEach(k => { const o = mon.objeto(k); o.position.set(HUECOS[k][0], 0, HUECOS[k][1]); o.visible = false; mon.lados.der.contenido.add(o); objs[k] = o; });
+
+const vertical = H > W;
+const wpp = 2 * 14 * Math.tan(THREE.MathUtils.degToRad(15)) / H;
+function encuadre(cx, cy, alto, centro) { const s = alto * wpp / centro.alto; return { x: (cx - W / 2) * wpp, y: -(cy - H / 2) * wpp - centro.c * s, s }; }
+const ENC = vertical
+  ? { hero: encuadre(W / 2, H * 0.36, H * 0.5, { c: 2.5, alto: 5.2 }), area: encuadre(W / 2, H * 0.27, H * 0.3, { c: 3.95, alto: 2.2 }) }
+  : { hero: encuadre(W * 0.72, H * 0.5, H * 0.92, { c: 2.5, alto: 5.2 }), area: encuadre(W * 0.72, H * 0.5, H * 0.5, { c: 3.95, alto: 2.2 }) };
+
+const ease = x => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+const easeIO = x => { x = Math.min(1, Math.max(0, x)); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const lerp = (a, b, k) => a + (b - a) * k;
+function anguloPara(items) {
+  const w = { docs: 3, mensajes: 2, testigos: 2, plazo: 3, pericial: 2 };
+  const tot = items.reduce((s, i) => s + w[i], 0);
+  return THREE.MathUtils.clamp((5 - tot) / 7, -1, 1) * MEDIDAS.anguloMax;
+}
+function caida(tau) { // 0 → arriba, termina en 0 con un rebote
+  if (tau <= 0) return 1.6; const g = 9.8; const t1 = Math.sqrt(2 * 1.6 / g);
+  if (tau < t1) return 1.6 - 0.5 * g * tau * tau;
+  const v = g * t1 * 0.28, t2 = tau - t1; const y = v * t2 - 0.5 * g * t2 * t2; return Math.max(0, y);
+}
+
+window.renderAt = function (t) {
+  const seg = SEG.find(s => t >= s.a && t < s.b) || SEG[SEG.length - 1];
+  const lt = t - seg.a, dur = seg.b - seg.a;
+  // Capas de texto
+  SEG.forEach(s => {
+    const on = s === seg; s.el.style.opacity = on ? Math.min(ease(lt / 0.5), 1 - ease((lt - dur + 0.45) / 0.45)) : 0;
+    if (!on) return;
+    s.el.querySelectorAll('.m > span').forEach((sp, i) => { const k = ease((lt - 0.2 - i * 0.18) / 0.9); sp.style.transform = `translateY(${(1 - k) * 105}%)`; });
+    const h = s.el.querySelector('h2'); if (h) { const k = ease((lt - 0.1) / 0.8); h.style.transform = `translateY(${(1 - k) * 30}px)`; h.style.filter = `blur(${(1 - k) * 8}px)`; }
+    s.el.querySelectorAll('.steps li').forEach((li, i) => { const k = ease((lt - 1.1 - i * 0.9) / 0.6); li.style.opacity = k; li.style.transform = `translateX(${(1 - k) * -24}px)`; });
+    const d = s.el.querySelector('.dato'); if (d) { const k = ease((lt - 4.3) / 0.6); d.style.opacity = k; d.style.transform = `scale(${0.9 + 0.1 * k})`; }
+    const sub = s.el.querySelector('.sub'); if (sub) { const k = ease((lt - 1.2) / 0.8); sub.style.opacity = k; }
+    const pr = s.el.querySelector('.precio'); if (pr) { const k = ease((lt - 0.6) / 0.8); pr.style.transform = `scale(${0.7 + 0.3 * k})`; pr.style.opacity = k; }
+  });
+  // Cortinilla entre segmentos
+  const fin = Math.min(lt, dur - lt);
+  document.getElementById('curtain').style.opacity = t < 0.4 ? 1 - t / 0.4 : (fin < 0.25 && t > 1 ? 1 - fin / 0.25 : 0) * 0.85;
+  // Barrido de luz AKOR
+  const sw = (lt % 4.5) / 1.4; document.getElementById('sweep').style.transform = `translateX(${lerp(-100, 100, Math.min(1, sw))}%)`;
+
+  // Cámara/encuadre
+  let e;
+  if (seg.id === 'intro') e = ENC.hero;
+  else if (seg.cierre) { e = { ...ENC.area }; e.s *= 0.75; if (!vertical) { e.x = 0; } e.y -= 0.3; }
+  else { const k = seg.id === 'familia' ? easeIO(lt / 1.2) : 1; e = { x: lerp(ENC.hero.x, ENC.area.x, k), y: lerp(ENC.hero.y, ENC.area.y, k), s: lerp(ENC.hero.s, ENC.area.s, k) }; }
+  piv.position.set(e.x, e.y, 0); piv.scale.setScalar(e.s);
+  piv.rotation.y = seg.id === 'intro' ? -0.9 + lt * 0.08 : Math.sin(t * 0.3) * 0.18;
+  piv.rotation.x = seg.id === 'intro' ? 0 : 0.05;
+  recorte.constant = seg.id === 'intro' ? (-0.2 + ease(lt / 3) * 5.6) * e.s + e.y : 1e4;
+  if (seg.cierre) { piv.visible = true; }
+  piv.visible = !seg.cierre;
+
+  // Objetos y balanza
+  const llegadas = seg.items.map((k, i) => ({ k, t0: 1.6 + i * 1.7 }));
+  Object.keys(objs).forEach(k => { objs[k].visible = false; });
+  let ang = anguloPara([]), prev = anguloPara([]), tLast = -10;
+  llegadas.forEach(({ k, t0 }, i) => {
+    const o = objs[k]; const tau = lt - t0;
+    if (tau > 0) { o.visible = true; o.position.y = caida(tau); o.rotation.y = tau < 0.6 ? tau * 2 : 1.2; prev = anguloPara(seg.items.slice(0, i)); ang = anguloPara(seg.items.slice(0, i + 1)); tLast = t0 + Math.sqrt(2 * 1.6 / 9.8); }
+    else o.position.y = 1.6;
+  });
+  const tt = Math.max(0, lt - tLast);
+  const angulo = ang + (prev - ang) * Math.exp(-2.6 * tt) * Math.cos(5 * tt);
+  mon.inclinar(angulo, 0.06 * Math.exp(-2 * tt) * Math.sin(7 * tt));
+  // Foco que barre
+  const ciclo = (lt % 4.5) / 1.4; barrido.intensity = ciclo < 1 ? Math.sin(ciclo * Math.PI) * 240 : 0;
+  barrido.position.set(e.x + (-5 + ciclo * 10) * e.s, e.y + 7 * e.s, 6); barrido.target.position.set(e.x, e.y + 4.4 * e.s, 0);
+  renderer.render(scene, camera);
+};
+window.SEG = SEG.map(s => ({ id: s.id, a: s.a, b: s.b }));
+await document.fonts.ready;
+window.listo = true;
+</script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Valdés &amp; Moncayo Abogados — Despacho en Mérida (Badajoz)</title>
+  <meta name="description" content="Despacho de abogados en Mérida: familia y herencias, laboral, penal, civil, empresa y administrativo. Primera consulta de 45 minutos por 60 €, descontables si nos encargas el caso. Concepto de web 3D de Daniel Durán.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#0B211C">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://danielduranmoya-spec.github.io/web-demo-abogados/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Valdés &amp; Moncayo Abogados">
+  <meta property="og:title" content="Valdés &amp; Moncayo — La ley, de tu lado. Desde Mérida.">
+  <meta property="og:description" content="Pon tu caso en la balanza: una balanza de latón en 3D sobre una columna romana que se inclina con lo que aportas. Despacho de abogados en Mérida.">
+  <meta property="og:url" content="https://danielduranmoya-spec.github.io/web-demo-abogados/">
+  <meta property="og:image" content="https://danielduranmoya-spec.github.io/web-demo-abogados/media/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
+
+  <!-- three.js para la escena 3D (versión fijada) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Valdés & Moncayo Abogados",
+    "description": "Despacho de abogados en Mérida, Badajoz (concepto de web, negocio ficticio).",
+    "url": "https://danielduranmoya-spec.github.io/web-demo-abogados/",
+    "telephone": "+34924000000",
+    "email": "consultas@ejemplo.com",
+    "priceRange": "€€",
+    "areaServed": ["Mérida", "Badajoz", "Extremadura"],
+    "knowsAbout": ["Derecho de familia", "Herencias", "Derecho laboral", "Derecho penal", "Derecho civil", "Derecho mercantil", "Derecho administrativo"],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle Sagasta 14, 1.º",
+      "postalCode": "06800",
+      "addressLocality": "Mérida",
+      "addressRegion": "Badajoz",
+      "addressCountry": "ES"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 38.9160, "longitude": -6.3437 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "14:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "16:30", "closes": "19:30" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "¿Cuánto cuesta la primera consulta?", "acceptedAnswer": { "@type": "Answer", "text": "60 € (IVA incluido) por 45 minutos, presencial o por videollamada. Si nos encargas el caso, se descuentan de la provisión de fondos." } },
+      { "@type": "Question", "name": "¿Trabajáis con justicia gratuita?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Si cumples los requisitos de la Ley 1/1996 de asistencia jurídica gratuita, te ayudamos a pedirla en el Colegio de Abogados." } },
+      { "@type": "Question", "name": "¿Puedo saber el presupuesto antes de empezar?", "acceptedAnswer": { "@type": "Answer", "text": "Siempre. Tras la primera consulta recibes por escrito una hoja de encargo con honorarios, fases y lo que no está incluido." } },
+      { "@type": "Question", "name": "¿Atendéis fuera de Mérida?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, en toda Extremadura y por videollamada. Los juicios fuera de Badajoz y Cáceres se presupuestan aparte." } }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-vm" viewBox="0 0 40 40"><path d="M20 4v29M9 33h22M12 8h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 8l-5 12h10zM28 8l-5 12h10z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M7 20a5 3 0 0 0 10 0M23 20a5 3 0 0 0 10 0" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="20" cy="4" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.4L3 21l4.7-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.6 8.2c.3-.6.6-.6.9-.6h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.5.7c-.1.2-.2.3 0 .6.5.9 1.3 1.7 2.3 2.2.3.2.4.1.6-.1l.6-.7c.2-.2.3-.2.6-.1l1.8.9c.3.1.4.2.4.4 0 .5-.2 1.2-.7 1.6-.6.5-1.4.7-2.4.4a9.8 9.8 0 0 1-5.4-4.6c-.7-1.3-.7-2.5-.2-3.7z" fill="currentColor"/></symbol>
+  </svg>
+
+  <div class="concept-bar" role="note">Concepto de web · despacho y datos ficticios · <a href="https://danielduranmoya-spec.github.io/">Daniel Durán</a></div>
+
+  <header class="site-header" data-header>
+    <div class="wrap site-header__inner">
+      <a class="logo" href="#inicio" aria-label="Valdés &amp; Moncayo Abogados, inicio">
+        <svg class="logo__mark" aria-hidden="true"><use href="#i-vm"/></svg>
+        <span class="logo__word">Valdés <i>&amp;</i> Moncayo</span>
+        <span class="logo__sub">Abogados · Mérida</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" data-nav-toggle>
+        <span class="nav-toggle__bars" aria-hidden="true"></span><span class="sr-only">Menú</span>
+      </button>
+      <nav class="nav" id="menu" aria-label="Principal" data-nav>
+        <a href="#balanza">Tu caso</a>
+        <a href="#areas">Áreas</a>
+        <a href="#video">Cómo trabajamos</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#honorarios">Honorarios</a>
+        <a class="btn btn--laton btn--small" href="#cita">Pedir cita</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Escena 3D: una sola, fija detrás del contenido -->
+  <div class="stage" data-stage aria-hidden="true">
+    <canvas class="stage__canvas" data-canvas></canvas>
+    <div class="stage__fallback" data-fallback hidden>
+      <svg viewBox="0 0 200 260" class="stage__svg"><use href="#i-vm" x="20" y="10" width="160" height="160"/><path d="M70 190h60M76 200h48v50H76z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <button class="btn btn--ghost btn--small" type="button" data-retry>Reintentar 3D</button>
+    </div>
+    <p class="stage__quality mono" data-quality></p>
+  </div>
+
+  <main id="contenido">
+    <!-- 1. Inicio (animación AKOR: barrido de luz y revelado por máscara) -->
+    <section class="hero" id="inicio" data-scene="hero">
+      <div class="hero__grid" aria-hidden="true" data-spot></div>
+      <div class="wrap hero__inner">
+        <p class="eyebrow reveal-mask"><span>Desde 1998 · Calle Sagasta, Mérida</span></p>
+        <h1 class="hero__title" data-split>La ley, <em>de tu lado.</em> Desde Mérida.</h1>
+        <p class="hero__lead reveal-mask"><span>Familia, trabajo, herencias, empresa o un juicio que no esperabas. Te decimos con claridad qué puedes ganar, qué puedes perder y cuánto cuesta, antes de empezar.</span></p>
+        <div class="hero__actions">
+          <a class="btn btn--laton" href="#cita">Primera consulta · 60 € <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost" href="#balanza">Pon tu caso en la balanza</a>
+        </div>
+        <dl class="hero__facts">
+          <div><dt data-count="27">0</dt><dd>años en Mérida</dd></div>
+          <div><dt data-count="3100" data-sep>0</dt><dd>asuntos llevados</dd></div>
+          <div><dt data-count="9">0</dt><dd>abogados colegiados</dd></div>
+          <div><dt><span data-count="72">0</span> h</dt><dd>para responderte</dd></div>
+        </dl>
+      </div>
+      <div class="hero__anchor" data-anchor="hero"></div>
+      <p class="hero__scroll mono" aria-hidden="true">Desliza<span></span></p>
+    </section>
+
+    <!-- 2. Balanza interactiva -->
+    <section class="balanza" id="balanza" data-scene="balanza">
+      <div class="wrap balanza__inner">
+        <div class="balanza__text">
+          <p class="eyebrow">La balanza de tu caso</p>
+          <h2 class="h2">Lo que aportas <em>pesa.</em></h2>
+          <p>Marca lo que tienes y mira cómo se inclina la balanza. No sustituye a un abogado, pero te enseña lo que miramos primero en la consulta.</p>
+          <fieldset class="pesos" data-pesos>
+            <legend class="sr-only">Lo que aportas a tu caso</legend>
+            <label class="peso"><input type="checkbox" value="docs" data-w="3"><span class="peso__box"></span><span><b>Documentos firmados</b><small>contrato, nóminas, escrituras, burofax</small></span></label>
+            <label class="peso"><input type="checkbox" value="mensajes" data-w="2"><span class="peso__box"></span><span><b>Mensajes o correos</b><small>WhatsApp, emails con fecha</small></span></label>
+            <label class="peso"><input type="checkbox" value="testigos" data-w="2"><span class="peso__box"></span><span><b>Testigos</b><small>personas que lo vieron y declararían</small></span></label>
+            <label class="peso"><input type="checkbox" value="plazo" data-w="3"><span class="peso__box"></span><span><b>Estás en plazo</b><small>un despido se recurre en 20 días hábiles</small></span></label>
+            <label class="peso"><input type="checkbox" value="pericial" data-w="2"><span class="peso__box"></span><span><b>Informe de un perito</b><small>médico, tasador, informático</small></span></label>
+          </fieldset>
+          <div class="veredicto" aria-live="polite">
+            <div class="veredicto__bar"><span data-meter></span></div>
+            <p data-veredicto><b>La balanza está en contra.</b> Sin pruebas, la otra parte lleva ventaja. Marca lo que tengas.</p>
+          </div>
+        </div>
+        <div class="balanza__anchor" data-anchor="balanza"></div>
+      </div>
+    </section>
+
+    <!-- 3. Áreas -->
+    <section class="areas" id="areas" data-scene="areas">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Áreas de práctica</p>
+          <h2 class="h2">Seis áreas, <em>un solo despacho.</em></h2>
+          <p>Cada asunto lo lleva un abogado responsable con nombre y teléfono directo. Si tu caso toca dos áreas, se sientan juntos.</p>
+        </header>
+        <ol class="areas__list" data-areas>
+          <li class="area" tabindex="0">
+            <span class="area__num">I</span>
+            <h3>Familia y herencias</h3>
+            <p>Divorcios de mutuo acuerdo y contenciosos, custodia, pensiones, testamentos, particiones y declaraciones de herederos.</p>
+            <p class="area__dato mono">Divorcio de mutuo acuerdo desde 690 €</p>
+          </li>
+          <li class="area" tabindex="0">
+            <span class="area__num">II</span>
+            <h3>Laboral</h3>
+            <p>Despidos, reclamación de salarios, incapacidades, acoso y negociación de salidas pactadas. Para trabajadores y para pymes.</p>
+            <p class="area__dato mono">Plazo de despido: 20 días hábiles</p>
+          </li>
+          <li class="area" tabindex="0">
+            <span class="area__num">III</span>
+            <h3>Penal</h3>
+            <p>Asistencia al detenido 24 h, delitos de tráfico, violencia de género, estafas y defensa en juicio rápido.</p>
+            <p class="area__dato mono">Guardia: 600 000 000</p>
+          </li>
+          <li class="area" tabindex="0">
+            <span class="area__num">IV</span>
+            <h3>Civil y contratos</h3>
+            <p>Alquileres y desahucios, reclamaciones de deudas, accidentes, vicios de construcción y cláusulas bancarias.</p>
+            <p class="area__dato mono">Monitorio de deudas desde 290 €</p>
+          </li>
+          <li class="area" tabindex="0">
+            <span class="area__num">V</span>
+            <h3>Empresa y mercantil</h3>
+            <p>Constitución de sociedades, pactos de socios, contratos con clientes y proveedores, segunda oportunidad y concursos.</p>
+            <p class="area__dato mono">Iguala mensual para pymes desde 120 €</p>
+          </li>
+          <li class="area" tabindex="0">
+            <span class="area__num">VI</span>
+            <h3>Administrativo y urbanismo</h3>
+            <p>Recursos ante la Junta de Extremadura y el Ayuntamiento, licencias, sanciones, oposiciones y responsabilidad patrimonial.</p>
+            <p class="area__dato mono">Recurso de multa desde 120 €</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. Vídeo interactivo -->
+    <section class="video" id="video" data-scene="video">
+      <div class="wrap">
+        <header class="section-head section-head--claro">
+          <p class="eyebrow">Vídeo interactivo · 50 s</p>
+          <h2 class="h2">Así es tu <em>primera consulta.</em></h2>
+          <p>Elige tu caso cuando el vídeo te lo pregunte y verás lo que haremos contigo, paso a paso.</p>
+        </header>
+        <div class="player" data-player>
+          <video class="player__video" data-video playsinline muted preload="metadata" poster="media/consulta-poster.jpg">
+            <source src="media/consulta.mp4" type="video/mp4">
+            <track kind="captions" src="media/consulta.vtt" srclang="es" label="Español">
+          </video>
+          <button class="player__big" type="button" data-play-big aria-label="Reproducir el vídeo"><svg aria-hidden="true"><use href="#i-play"/></svg><span>Ver el vídeo</span></button>
+          <div class="player__choice" data-choice hidden role="group" aria-labelledby="choice-q">
+            <p class="player__q" id="choice-q">¿Cuál es tu caso?</p>
+            <div class="player__opts">
+              <button type="button" data-goto="familia">Familia o herencia</button>
+              <button type="button" data-goto="laboral">Me han despedido</button>
+              <button type="button" data-goto="penal">Me han denunciado</button>
+              <button type="button" data-goto="empresa">Tengo una empresa</button>
+            </div>
+            <p class="player__timer mono"><span data-choice-timer></span></p>
+          </div>
+          <div class="player__hotspot" data-hotspot hidden><a href="#cita" class="btn btn--laton btn--small">Pedir esta cita <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <div class="player__bar">
+            <button class="player__btn" type="button" data-toggle aria-label="Reproducir"><svg aria-hidden="true"><use href="#i-play"/></svg></button>
+            <div class="player__chapters" data-chapters role="group" aria-label="Capítulos"></div>
+            <span class="player__time mono" data-time>0:00</span>
+            <button class="player__btn" type="button" data-mute aria-label="Activar sonido" aria-pressed="false"><svg aria-hidden="true"><use href="#i-sound"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Método -->
+    <section class="metodo" id="metodo" data-scene="metodo">
+      <div class="wrap metodo__inner">
+        <header class="section-head">
+          <p class="eyebrow">Método</p>
+          <h2 class="h2">Sin letra pequeña. <em>Por escrito.</em></h2>
+        </header>
+        <ol class="pasos">
+          <li><span class="pasos__n">01</span><h3>Escuchamos</h3><p>45 minutos contigo. Traes los papeles y te decimos si tienes caso y cuántas opciones reales hay.</p></li>
+          <li><span class="pasos__n">02</span><h3>Presupuesto cerrado</h3><p>Hoja de encargo con honorarios por fases, provisión de fondos y lo que no está incluido. Firmas solo si te convence.</p></li>
+          <li><span class="pasos__n">03</span><h3>Acuerdo primero</h3><p>Intentamos negociar antes del juzgado: es más rápido y más barato. Si no hay acuerdo, vamos a juicio preparados.</p></li>
+          <li><span class="pasos__n">04</span><h3>Te informamos</h3><p>Cada escrito y cada resolución te llega el mismo día, con una explicación en lenguaje normal.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Equipo -->
+    <section class="equipo" id="equipo" data-scene="equipo">
+      <div class="wrap">
+        <header class="section-head section-head--claro">
+          <p class="eyebrow">Equipo</p>
+          <h2 class="h2">Quién te va a <em>defender.</em></h2>
+        </header>
+        <ul class="equipo__list">
+          <li class="socio"><span class="socio__ini" aria-hidden="true">LV</span><h3>Lucía Valdés Rubio</h3><p class="socio__rol">Socia fundadora · Familia y herencias</p><p class="mono">Colegiada nº 0000 · ficticio</p></li>
+          <li class="socio"><span class="socio__ini" aria-hidden="true">AM</span><h3>Andrés Moncayo Gil</h3><p class="socio__rol">Socio fundador · Penal</p><p class="mono">Colegiado nº 0000 · ficticio</p></li>
+          <li class="socio"><span class="socio__ini" aria-hidden="true">IC</span><h3>Irene Cáceres Lobo</h3><p class="socio__rol">Laboral y Seguridad Social</p><p class="mono">Colegiada nº 0000 · ficticio</p></li>
+          <li class="socio"><span class="socio__ini" aria-hidden="true">JP</span><h3>Javier Pozo Merino</h3><p class="socio__rol">Empresa y administrativo</p><p class="mono">Colegiado nº 0000 · ficticio</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. Honorarios -->
+    <section class="honorarios" id="honorarios" data-scene="honorarios">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Honorarios</p>
+          <h2 class="h2">Cuánto cuesta, <em>antes de empezar.</em></h2>
+          <p>Precios orientativos con IVA incluido. El presupuesto definitivo va en la hoja de encargo.</p>
+        </header>
+        <div class="tarifas">
+          <article class="tarifa">
+            <h3>Primera consulta</h3>
+            <p class="tarifa__precio">60 €</p>
+            <ul><li>45 minutos, presencial o vídeo</li><li>Revisión de tus documentos</li><li>Se descuenta si nos encargas el caso</li></ul>
+          </article>
+          <article class="tarifa tarifa--destacada">
+            <h3>Asunto cerrado</h3>
+            <p class="tarifa__precio"><small>desde</small> 290 €</p>
+            <ul><li>Precio fijo por fases</li><li>Escritos, vistas y negociación</li><li>Pago fraccionado sin intereses</li></ul>
+          </article>
+          <article class="tarifa">
+            <h3>Iguala para empresas</h3>
+            <p class="tarifa__precio"><small>desde</small> 120 €<small>/mes</small></p>
+            <ul><li>Consultas ilimitadas por teléfono</li><li>Revisión de contratos</li><li>Respuesta en 24 horas</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Preguntas -->
+    <section class="faq" id="faq" data-scene="faq">
+      <div class="wrap faq__inner">
+        <header class="section-head section-head--claro">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2 class="h2">Lo que nos <em>preguntan</em> siempre.</h2>
+        </header>
+        <div class="faq__list">
+          <details><summary>¿Cuánto cuesta la primera consulta?</summary><p>60 € con IVA por 45 minutos, presencial o por videollamada. Si nos encargas el caso, se descuentan de la provisión de fondos.</p></details>
+          <details><summary>¿Trabajáis con justicia gratuita?</summary><p>Sí. Si cumples los requisitos de la Ley 1/1996 de asistencia jurídica gratuita, te ayudamos a pedirla en el Colegio de Abogados.</p></details>
+          <details><summary>¿Puedo saber el presupuesto antes de empezar?</summary><p>Siempre. Tras la primera consulta recibes por escrito una hoja de encargo con honorarios, fases y lo que no está incluido.</p></details>
+          <details><summary>¿Atendéis fuera de Mérida?</summary><p>Sí, en toda Extremadura y por videollamada. Los juicios fuera de las provincias de Badajoz y Cáceres se presupuestan aparte.</p></details>
+          <details><summary>¿Lo que os cuento es confidencial?</summary><p>Sí, desde la primera llamada. El secreto profesional del abogado está protegido por la Ley Orgánica del Poder Judicial y el Estatuto General de la Abogacía.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Cita y contacto -->
+    <section class="cita" id="cita" data-scene="cita">
+      <div class="wrap cita__inner">
+        <div class="cita__text">
+          <p class="eyebrow">Pedir cita</p>
+          <h2 class="h2">Cuéntanos tu caso <em>en dos líneas.</em></h2>
+          <p>Te llamamos en menos de 72 horas laborables para fijar la consulta. Lo que escribas aquí no se guarda en esta web: se abre tu WhatsApp o tu correo con el mensaje preparado.</p>
+          <dl class="contacto">
+            <div><dt>Dirección</dt><dd>Calle Sagasta 14, 1.º · 06800 Mérida (Badajoz)<br><small>dirección ficticia</small></dd></div>
+            <div><dt>Teléfono</dt><dd><a href="tel:+34924000000">924 000 000</a></dd></div>
+            <div><dt>Horario</dt><dd>L–V 9:00–14:00 · L–J 16:30–19:30 <span class="estado" data-estado></span></dd></div>
+          </dl>
+        </div>
+        <form class="form" data-form novalidate>
+          <div class="form__row">
+            <label for="f-nombre">Nombre</label>
+            <input id="f-nombre" name="nombre" autocomplete="name" required>
+          </div>
+          <div class="form__row">
+            <label for="f-tel">Teléfono</label>
+            <input id="f-tel" name="telefono" type="tel" inputmode="tel" autocomplete="tel" required>
+          </div>
+          <div class="form__row">
+            <label for="f-area">Área</label>
+            <select id="f-area" name="area">
+              <option>Familia y herencias</option><option>Laboral</option><option>Penal</option>
+              <option>Civil y contratos</option><option>Empresa y mercantil</option><option>Administrativo y urbanismo</option><option>No lo sé</option>
+            </select>
+          </div>
+          <div class="form__row">
+            <label for="f-modo">Consulta</label>
+            <select id="f-modo" name="modo"><option>Presencial en Mérida</option><option>Videollamada</option></select>
+          </div>
+          <div class="form__row form__row--full">
+            <label for="f-caso">Tu caso en dos líneas</label>
+            <textarea id="f-caso" name="caso" rows="3" maxlength="400" required></textarea>
+          </div>
+          <label class="form__check form__row--full"><input type="checkbox" name="privacidad" required> <span>He leído la <a href="privacidad.html">política de privacidad</a> y acepto que me contactéis para esta consulta.</span></label>
+          <p class="form__error form__row--full" data-form-error role="alert" hidden></p>
+          <div class="form__actions form__row--full">
+            <button class="btn btn--laton" type="submit" data-send="wa"><svg aria-hidden="true"><use href="#i-wa"/></svg> Enviar por WhatsApp</button>
+            <button class="btn btn--ghost-dark" type="submit" data-send="mail">Enviar por correo</button>
+          </div>
+        </form>
+      </div>
+      <div class="wrap mapa" data-mapa>
+        <div class="mapa__placeholder" data-mapa-ph>
+          <p>El mapa es de OpenStreetMap, un servicio externo. Solo se carga si lo aceptas.</p>
+          <button class="btn btn--ghost-dark btn--small" type="button" data-load-map>Cargar mapa</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__inner">
+      <div>
+        <a class="logo" href="#inicio"><svg class="logo__mark" aria-hidden="true"><use href="#i-vm"/></svg><span class="logo__word">Valdés <i>&amp;</i> Moncayo</span></a>
+        <p class="site-footer__claim">Abogados en Mérida desde 1998.</p>
+      </div>
+      <nav class="site-footer__legal" aria-label="Legal">
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="privacidad.html">Política de privacidad</a>
+        <a href="cookies.html">Política de cookies</a>
+        <button class="link-button" type="button" data-open-cookies>Configurar cookies</button>
+      </nav>
+      <div class="site-footer__credit">
+        <p>Negocio, personas y datos ficticios. La balanza y la columna 3D están hechas con código (three.js). Web diseñada y desarrollada por <a href="https://danielduranmoya-spec.github.io/">Daniel Durán</a>.</p>
+      </div>
+    </div>
+    <div class="wrap site-footer__bottom mono">
+      <p>© <span data-year>2026</span> Valdés &amp; Moncayo Abogados · Concepto</p>
+      <a href="#inicio">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" role="region" aria-label="Aviso de cookies" data-cookie-banner hidden>
+    <p class="cookie-banner__title">Tu elección sobre contenido externo</p>
+    <p>No usamos cookies de publicidad ni de analítica. Si aceptas, cargamos el mapa de OpenStreetMap, que es un servicio de terceros. <a href="cookies.html">Más información</a></p>
+    <div class="cookie-banner__actions">
+      <button class="btn btn--cookie" type="button" data-consent="rejected">Rechazar</button>
+      <button class="btn btn--cookie" type="button" data-consent="accepted">Aceptar</button>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+  <script type="module" src="escena.js"></script>
+</body>
+</html>
